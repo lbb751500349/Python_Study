@@ -1,0 +1,51 @@
+# _*_ coding:UTF-8 _*_
+
+import mysql.connector
+
+#连接数据库指定服务器
+def Sql_Server_Connect():
+    # 连接数据库的基本信息
+    config = {'host': '192.168.104.101',  # 默认地址127.0.0.1
+              'port': '3306',  # 默认端口3306
+              'user': 'dev',
+              'passwd': '123456',
+              # 'database': 'test3',# 访问的数据库名称
+              'charset': 'utf8'  # 默认utf8
+              }
+    # 创建连接数据库实例
+    mydb = mysql.connector.connect(**config)
+    # python操作数据的方法即操作游标
+    mycursor = mydb.cursor()
+    mycursor.execute("SHOW DATABASES")
+    print(mycursor)
+
+
+# 连接数据库操作
+def Sql_Connect():
+    # 连接数据库的基本信息
+    config = {'host': '192.168.104.101',  # 默认地址127.0.0.1
+              'port': '3306',  # 默认端口3306
+              'user': 'dev',
+              'passwd': '123456',
+              'database': 'point',# 访问的数据库名称
+              'charset': 'utf8'  # 默认utf8
+              }
+    # 创建连接数据库实例
+    mydb = mysql.connector.connect(**config)
+    # python操作数据的方法即操作游标
+    mycursor = mydb.cursor()
+    # sql语句
+    sql = 'select * from point.point_test;'
+    # 通过操作游标执行命令
+    mycursor.execute(sql)
+    # 返回查询数据库的所有数据，数据类型：嵌套元祖
+    mycursor = mycursor.fetchall()
+    print(mycursor)
+    # 遍历每个元祖并打印出来
+    for x in mycursor:
+        print(x)
+    # 返回查询数据库的第一个数据，数据类型：元祖
+    mycursor = mycursor.fetchone()
+    print(mycursor)
+    # 关闭数据库连接
+    mydb.close()
