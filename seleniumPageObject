@@ -1,0 +1,60 @@
+#basePage模块对页面元素操作进行二次封装，抽象常用的方法，例如：滑动具体距离、输入前先清空输入框
+class basePage(object):
+
+    def __init__(self,driver):
+        self.driver = driver
+
+    def find_element_by_id(self,id):
+        return self.driver.find_element_by_id(id)
+
+    def click(self,location):
+        return self.driver.find_element_by_id(location).click()
+
+    def send_keys(self,location, text):
+        self.driver.find_element_by_id(location).send_keys(text)
+        
+        
+        
+#ModePage模块，把页面元素对象封装成相应业务操作，例如：根据测试用例去点击后滑动然后校验等连贯操作
+import unittest
+import time
+from PageObject.BasePage import basePage
+from selenium import webdriver
+
+class modePage(basePage):
+    input_text = 'kw'
+    input_submit = 'su'
+    input_value = '麦子学院'
+    check_title = '麦子学院_百度搜索'
+
+    def search_maizi(self):
+        self.send_keys(self.input_text, self.input_value)
+        self.click(self.input_submit)
+        time.sleep(3)
+        # assert self.check_title
+
+
+class my_Test(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome(r'D:\Google\Chrome\Application\chromedriver.exe')
+        self.driver.get(r'https://www.baidu.com/')
+
+    def test_Operation(self):
+        mp = modePage(self.driver)
+        mp.search_maizi()
+
+    def tearDown(self):
+        self.driver.quit()
+
+def Operation(url):
+    driver = webdriver.Chrome(r'D:\Google\Chrome\Application\chromedriver.exe')
+    driver.get(url)
+    mp1 = modePage(driver)
+    mp1.search_maizi()
+
+
+#run.py模块：
+
+from PageObject.ModePage import Operation
+
+Operation(r'https://www.baidu.com/')
