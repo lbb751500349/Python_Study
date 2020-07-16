@@ -4,7 +4,8 @@ class basePage(object):
 
     def __init__(self,driver):
         self.driver = driver
-
+咋提交的
+# 怎么提交没有效果
     def find_element_by_id(self,id):
         return self.driver.find_element_by_id(id)
 
@@ -14,8 +15,9 @@ class basePage(object):
     def send_keys(self,location, text):
         self.driver.find_element_by_id(location).send_keys(text)
         
-        
-        
+
+# 发达加肥加大看看见112
+
 #ModePage模块，把页面元素对象封装成相应业务操作，例如：根据测试用例去点击后滑动然后校验等连贯操作
 import unittest
 import time
