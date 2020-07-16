@@ -4,8 +4,8 @@ class basePage(object):
 
     def __init__(self,driver):
         self.driver = driver
-咋提交的
-# 怎么提交没有效果
+
+
     def find_element_by_id(self,id):
         return self.driver.find_element_by_id(id)
 
