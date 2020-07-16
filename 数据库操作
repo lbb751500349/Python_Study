@@ -2,7 +2,7 @@
 
 import mysql.connector
 
-#连接数据库指定服务器
+#连接数据库指定服务器1
 def Sql_Server_Connect():
     # 连接数据库的基本信息
     config = {'host': '192.168.104.101',  # 默认地址127.0.0.1
